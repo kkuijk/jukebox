@@ -1,0 +1,20 @@
+
+# Pas de naam aan naar iets unieks voor jouw app
+app = "jukebox-koen"
+
+primary_region = "ams"   # Amsterdam is logisch voor jou
+
+# Frontend communiceert met backend op localhost:3001 (gezet in Dockerfile)
+[env]
+NEXT_PUBLIC_API_BASE_URL = "http://localhost:3001"
+NODE_ENV = "production"
+
+# Moderne Fly-config: één HTTP service op de frontend-poort
+[http_service]
+internal_port = 3000
+force_https = true
+auto_stop_machines = false
+min_machines_running = 1
+
+  [http_service.concurrency]
+    soft    soft_limit = 20
